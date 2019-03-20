@@ -21,7 +21,12 @@ RUN chmod 777 /pyeo/bin/*
 ENV PYEO /pyeo
 RUN /opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks
 
+RUN conda install -c conda-forge jupyterhub
+RUN pip install --no-cache-dir dockerspawner jupyterhub-firstuseauthenticator
 
-#CD pyeo/
-#python
-#import pyeo.core
+RUN jupyterhub --generate-config
+RUN echo import dockerspawner >> jupyterhub_config.py
+RUN echo import firstuseauthenticator >> jupyterhub_config.py
+RUN echo c.JupyterHub.authenticator_class = firstuseauthenticator.FirstUseAuthenticator >> jupyterhub_config.py
+
+RUN echo c.Authenticator.admin_users = {\"jfr10\"} >> jupyterhub_config.py
