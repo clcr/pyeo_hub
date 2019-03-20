@@ -17,7 +17,10 @@ RUN ./Sen2Cor-02.05.05-Linux64.run
 ENV PATH /opt/conda/envs/eoenv/bin:$PATH
 RUN git clone https://github.com/clcr/pyeo
 
+RUN chmod 777 /pyeo/bin/*
+ENV PYEO /pyeo
 RUN /opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks
+
 
 #CD pyeo/
 #python
