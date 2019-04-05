@@ -23,3 +23,7 @@ RUN /opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks
 
 RUN conda install -c conda-forge jupyterhub
 RUN conda install -c conda-forge notebook
+
+RUN mkdir /notebooks/ && cd /notebooks \ 
+&& git clone https://github.com/clcr/training_materials \
+&& git clone https://github.com/UniOfLeicester/PythonCourses
